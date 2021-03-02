@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadImageComponent implements OnInit {
   file: any;
+  isUploaded = false;
 
   constructor() { }
 
@@ -15,6 +16,7 @@ export class UploadImageComponent implements OnInit {
  
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
+      this.isUploaded = true;
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]);
