@@ -1,11 +1,17 @@
 <div *ngIf="router.url == '/login'">
     <mat-toolbar class="main-page-mat-toolbar">
+        <button mat-icon-button [routerLink]="'/login'" class="home-icon">
+            <mat-icon>home</mat-icon>
+          </button>
         <a [routerLink]="'/table'">Table</a>
         <a [routerLink]="'/upload-image'">Upload image</a>
     </mat-toolbar>
 </div>
 <div *ngIf="router.url != '/login'">
     <mat-toolbar class="mat-toolbar-general-page">
+        <button mat-icon-button [routerLink]="'/login'" class="home-icon">
+            <mat-icon>home</mat-icon>
+          </button>
         <a [routerLink]="'/table'">Table</a>
         <a [routerLink]="'/upload-image'">Upload image</a>
         <div *ngIf="router.url != '/login'">
