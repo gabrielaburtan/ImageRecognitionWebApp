@@ -1,1 +1,48 @@
-<p>history-table works!</p>
+<div id="background">
+        <table mat-table [dataSource]="dataSource" class="table"> 
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </td>
+            </ng-container>
+        
+            <!-- Image Name Column -->
+            <ng-container matColumnDef="Image Name">
+            <th mat-header-cell *matHeaderCellDef> Image Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.imageName}} </td>
+            </ng-container>
+        
+            <!-- Image Size Column -->
+            <ng-container matColumnDef="Image Size">
+            <th mat-header-cell *matHeaderCellDef> Image Size </th>
+            <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+            </ng-container>
+        
+            <!-- Recognition Result Column -->
+            <ng-container matColumnDef="Recognition Result">
+            <th mat-header-cell *matHeaderCellDef> Recognition Result </th>
+            <td mat-cell *matCellDef="let element"> {{element.recognitionResult}} </td>
+            </ng-container>
+        
+            <!-- Image Download Link Column -->
+            <ng-container matColumnDef="Image Download Link">
+            <th mat-header-cell *matHeaderCellDef> Image Download Link </th>
+            <td mat-cell *matCellDef="let element"> {{element.imageDownloadLink}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)">
+            </tr>
+        </table>
+</div>
