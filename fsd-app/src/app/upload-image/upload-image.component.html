@@ -1,4 +1,12 @@
-<div class="background">
-        <input class="form-control" type="file" (change)="onSelectFile($event)">
-        <img [src]="file" height="200">
+<div id="background">
+    <button type="button" (click)="fileInput.click()" class="upload-button">
+        <span>Upload</span>
+        <input #fileInput type="file" (change)="onSelectFile($event)" style="display:none;" />
+    </button>
+    <mat-card>
+        <mat-card-content>
+            <img [src]="file" height="200">
+            <label *ngIf="isUploaded == false">Image</label>
+        </mat-card-content>
+    </mat-card>
 </div>
