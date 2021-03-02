@@ -1,27 +1,25 @@
 <div id="background">
   <mat-card>
+    <img class="login-image" src="../../assets/login-pic.jpg">
     <mat-card-content>
-      <div class="form-parent">
         <form>
-          <img class="login-image" src="../../assets/login-pic.jpg">
-          <div>
-            <h2>User Login</h2>
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="Email" formControlName="username" required>
-              <!-- <mat-error>
-            Please provide a valid email address
-          </mat-error> -->
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input matInput type="password" placeholder="Password" formControlName="password" required>
-              <!-- <mat-error>
-            Please provide a valid password
-          </mat-error> -->
-            </mat-form-field>
-            <button mat-raised-button color="primary" [routerLink]="'/table'">Login</button>
-          </div>
+          <h1 class="title">User Login</h1>
+
+          <mat-form-field appearance="outline" class="field">
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-label>Email id</mat-label>
+            <input matInput placeholder="email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="field">
+            <mat-icon matPrefix>https</mat-icon>
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="password">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" [routerLink]="'/table'" class="login-button">Login</button>
+          <a>Forgot Username/Password?</a>
         </form>
-      </div>
     </mat-card-content>
   </mat-card>
 </div>
