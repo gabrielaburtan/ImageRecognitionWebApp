@@ -69,6 +69,10 @@ form {
   font-size: large;
 }
 
-.login-button:hover{
+.login-button:enabled:hover {
   background-color: #417327;
+}
+
+.login-button:disabled:hover {
+  background-color: none;
 }
