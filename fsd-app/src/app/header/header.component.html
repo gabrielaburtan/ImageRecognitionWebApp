@@ -1,0 +1,6 @@
+<mat-toolbar color="primary" *ngIf = "isLoggedIn$ | async as isLoggedIn">
+    <a routerLink="/history">History</a>
+    <a routerLink="/upload">Upload</a>
+    <a class="logoutPos" (click)="onLogout()" *ngIf="isLoggedIn">Log Out</a>
+</mat-toolbar> 
+
