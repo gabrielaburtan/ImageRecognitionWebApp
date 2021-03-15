@@ -2,6 +2,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { FileSizePipe } from './pipes/file-resize';
 import { HistoryTableComponent } from './history-table/history-table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -21,7 +22,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     AppComponent,
     LoginComponent,
     HistoryTableComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    FileSizePipe
   ],
   imports: [
     BrowserModule,
