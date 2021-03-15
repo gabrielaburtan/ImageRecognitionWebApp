@@ -16,6 +16,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     LoginComponent,
     HistoryTableComponent,
     UploadImageComponent,
-    FileSizePipe
+    FileSizePipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
