@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
+import { HeaderStateService } from '../services/header-state.service';
+import { Router } from '@angular/router';
+import { UserServiceService } from '../services/user-service.service';
 import { Validators } from '@angular/forms';
 
 @Component({
@@ -10,16 +14,44 @@ import { Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   logInForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
-  constructor() { }
+  submitted = true;
+
+  constructor(private router:Router,private fb: FormBuilder, private userService: UserServiceService,private headerState: HeaderStateService) { }
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    console.warn(this.logInForm.value);
+
+  validate() {
+    if (this.logInForm.valid)
+     { console.log("Merge");
+
+      this.userService.login(this.logInForm.getRawValue()).subscribe(data => {
+     this.router.navigate(['/history']);
+
+      }, error => {})
+
   }
+  }
+  onSubmit() {
+    this.submitted = true;
+    if (this.logInForm.invalid) {
+      return;
+    }
+    let body = {
+      username: this.logInForm.value.username,
+      password: this.logInForm.value.password
+    };
+
+
+
+    if(this.logInForm.valid){
+      this.router.navigate(['/table']);
+    }
+
 };
 
+}

@@ -8,7 +8,7 @@
           <mat-form-field appearance="outline" class="field">
             <mat-icon matPrefix>email</mat-icon>
             <mat-label>Email id</mat-label>
-            <input type="email" matInput placeholder="email" formControlName="email"> 
+            <input type="email" matInput placeholder="email" formControlName="username">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="field">
@@ -17,7 +17,7 @@
             <input type="password" matInput placeholder="password" formControlName="password">
           </mat-form-field>
 
-          <button mat-raised-button color="primary" [routerLink]="'/table'" class="login-button" 
+          <button mat-raised-button color="primary" [routerLink]="'/table'" class="login-button"
           type="submit" [disabled]="!logInForm.valid">Login</button>
           <a>Forgot Username/Password?</a>
         </form>
