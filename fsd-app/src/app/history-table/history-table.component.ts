@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectionModel} from '@angular/cdk/collections';
+
+import { FileSizePipe } from '../pipes/file-resize';
 import {MatTableDataSource} from '@angular/material/table';
+import {SelectionModel} from '@angular/cdk/collections';
 
 export interface ImageInfo {
   imageName: string;
@@ -23,7 +25,8 @@ const ELEMENT_DATA: ImageInfo[] = [
 @Component({
   selector: 'app-history-table',
   templateUrl: './history-table.component.html',
-  styleUrls: ['./history-table.component.scss']
+  styleUrls: ['./history-table.component.scss'],
+  providers:[FileSizePipe]
 })
 export class HistoryTableComponent implements OnInit {
 
@@ -47,5 +50,7 @@ export class HistoryTableComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  constructor(private datasize: FileSizePipe){}
 
 }

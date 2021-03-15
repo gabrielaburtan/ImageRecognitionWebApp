@@ -16,10 +16,10 @@ export class UserServiceService {
   }
 
   login(data: {}) {
-
-    return this.request.post(data, "history").pipe(
+    return this.request.post(data, "table").pipe(
       tap((resp: User) => {
-        this.userInfo = resp;this.header.loggedIn.next(true);
+        this.userInfo = resp;
+        this.header.loggedIn.next(true);
       }));
   }
 

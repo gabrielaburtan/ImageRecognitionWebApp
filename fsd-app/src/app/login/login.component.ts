@@ -27,15 +27,13 @@ export class LoginComponent implements OnInit {
 
   validate() {
     if (this.logInForm.valid)
-     { console.log("Merge");
-
-      this.userService.login(this.logInForm.getRawValue()).subscribe(data => {
-     this.router.navigate(['/history']);
-
+     {
+        this.userService.login(this.logInForm.getRawValue()).subscribe(data => {
+        this.router.navigate(['/table']);
       }, error => {})
+    }
+  }
 
-  }
-  }
   onSubmit() {
     this.submitted = true;
     if (this.logInForm.invalid) {
@@ -46,12 +44,8 @@ export class LoginComponent implements OnInit {
       password: this.logInForm.value.password
     };
 
-
-
     if(this.logInForm.valid){
       this.router.navigate(['/table']);
     }
-
-};
-
+  };
 }

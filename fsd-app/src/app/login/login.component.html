@@ -2,13 +2,13 @@
   <mat-card>
     <img class="login-image" src="../../assets/login-pic.jpg">
     <mat-card-content>
-        <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="logInForm">
           <h1 class="title">User Login</h1>
 
           <mat-form-field appearance="outline" class="field">
             <mat-icon matPrefix>email</mat-icon>
             <mat-label>Email id</mat-label>
-            <input type="email" matInput placeholder="email" formControlName="username">
+            <input type="username" matInput placeholder="email" formControlName="username">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="field">
@@ -17,8 +17,8 @@
             <input type="password" matInput placeholder="password" formControlName="password">
           </mat-form-field>
 
-          <button mat-raised-button color="primary" [routerLink]="'/table'" class="login-button"
-          type="submit" [disabled]="!logInForm.valid">Login</button>
+          <button mat-raised-button color="primary" class="login-button"
+          type="submit" [disabled]="!logInForm.valid" (click)="validate()">Login</button>
           <a>Forgot Username/Password?</a>
         </form>
     </mat-card-content>

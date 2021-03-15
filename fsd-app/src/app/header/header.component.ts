@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
+
 import { HeaderStateService } from 'src/app/services/header-state.service';
 
 @Component({
@@ -17,10 +18,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.headerService.isLoggedIn;
+    console.log(this.headerService.isLoggedIn)
   }
 
   onLogout(){
-    
+
   }
 
 }
