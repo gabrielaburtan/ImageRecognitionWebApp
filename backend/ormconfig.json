@@ -1,7 +1,7 @@
 {
    "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
+   "host": "db",
+   "port": "5432:5432",
    "username": "fsdb",
    "password": "fsdb",
    "database": "fsdb",
