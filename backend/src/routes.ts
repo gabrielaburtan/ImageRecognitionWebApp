@@ -1,3 +1,5 @@
+import { ImageController } from "./controller/ImageController";
+import { LoginController } from "./controller/LoginController";
 import {UserController} from "./controller/UserController";
 
 export const Routes = [{
@@ -20,4 +22,15 @@ export const Routes = [{
     route: "/users/:id",
     controller: UserController,
     action: "remove"
-}];
+}, {
+    method: "get",
+    route: "/images",
+    controller: ImageController,
+    action: "all"
+}, {
+    method: "post",
+    route: "/login",
+    controller: LoginController,
+    action: "login"
+}
+];
