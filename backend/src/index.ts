@@ -1,11 +1,14 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
-import * as express from "express";
+
 import * as bodyParser from "body-parser";
+import * as express from "express";
+
 import {Request, Response} from "express";
+
+import { Image } from "./entity/Image";
 import {Routes} from "./routes";
 import {User} from "./entity/User";
-import { Image } from "./entity/Image";
+import {createConnection} from "typeorm";
 
 createConnection().then(async connection => {
 
@@ -34,24 +37,20 @@ createConnection().then(async connection => {
 
     // insert new users for test
     await connection.manager.save(connection.manager.create(User, {
-        firstName: "Robert",
-        lastName: "Bucur",
-        age: 21
+        username: "Robert",
+        password: "Bucur"
     }));
     await connection.manager.save(connection.manager.create(User, {
-        firstName: "Gabriela",
-        lastName: "Burtan",
-        age: 21
+        username: "Gabriela",
+        password: "Burtan"
     }));
     await connection.manager.save(connection.manager.create(User, {
-        firstName: "Rares",
-        lastName: "Chirciu",
-        age: 21
+        username: "Rares",
+        password: "Chirciu"
     }));
     await connection.manager.save(connection.manager.create(User, {
-        firstName: "Denisa",
-        lastName: "Francu",
-        age: 21
+        username: "Denisa",
+        password: "Francu"
     }));
 
     //insert images for test
