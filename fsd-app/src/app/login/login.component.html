@@ -2,7 +2,7 @@
   <mat-card>
     <img class="login-image" src="../../assets/login-pic.jpg">
     <mat-card-content>
-        <form [formGroup]="logInForm">
+        <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
           <h1 class="title">User Login</h1>
 
           <mat-form-field appearance="outline" class="field">
@@ -18,7 +18,7 @@
           </mat-form-field>
 
           <button mat-raised-button color="primary" class="login-button"
-          type="submit" [disabled]="!logInForm.valid" (click)="validate()">Login</button>
+          type="submit" [disabled]="!logInForm.valid">Login</button>
           <a>Forgot Username/Password?</a>
         </form>
     </mat-card-content>

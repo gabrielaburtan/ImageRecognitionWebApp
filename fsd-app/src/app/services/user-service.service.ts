@@ -1,5 +1,6 @@
 import { HeaderStateService } from './header-state.service';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { RequestServiceService } from './request-service.service';
 import { User } from '../models/user';
 import { tap } from 'rxjs/operators';
@@ -8,19 +9,16 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserServiceService {
+  public userData : any;
 
-  private userInfo: User
+  constructor(private requestService : RequestServiceService) { }
 
-  constructor(private request: RequestServiceService, private header : HeaderStateService) {
-    this.userInfo = {username: "", password: ""}
+  login(body : any) : Observable<any> {
+    return this.requestService.post("login", body).pipe(
+      tap(data => {
+        console.log(data);
+        this.userData = data;
+      })
+    )
   }
-
-  login(data: {}) {
-    return this.request.post(data, "table").pipe(
-      tap((resp: User) => {
-        this.userInfo = resp;
-        this.header.loggedIn.next(true);
-      }));
-  }
-
 }

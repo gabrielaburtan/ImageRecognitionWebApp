@@ -1,6 +1,5 @@
-<mat-toolbar color="primary" *ngIf = "isLoggedIn$ | async as isLoggedIn">
+<mat-toolbar color="primary" *ngIf="header.events">
     <a routerLink="/table">Table</a>
     <a routerLink="/upload-image">Upload</a>
-    <a class="logoutPos" (click)="onLogout()" *ngIf="isLoggedIn">Log Out</a>
+    <a routerLink='/' class="logoutPos" (click)="logoutButton()">Log Out</a>
 </mat-toolbar>
-

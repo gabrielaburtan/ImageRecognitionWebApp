@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { HeaderStateService } from 'src/app/services/header-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,19 +11,14 @@ import { HeaderStateService } from 'src/app/services/header-state.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean> ;
-
-  constructor(private headerService: HeaderStateService) {
-    this.isLoggedIn$ = of(false);
-   }
+  constructor(public header : HeaderStateService, private router : Router) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.headerService.isLoggedIn;
-    console.log(this.headerService.isLoggedIn)
+    this.header.show();
   }
 
-  onLogout(){
-
+  logoutButton() : void{
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
-
 }

@@ -7,12 +7,17 @@ import { Router } from '@angular/router';
 })
 export class HeaderStateService {
 
-  public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean> (false);
+  events : boolean;
+  //events = new EventEmitter<boolean>();
 
-  get isLoggedIn(){
-    return this.loggedIn.asObservable();
+  constructor() { this.events = false }
+
+  show() {
+     this.events = true;
   }
 
-  constructor(private router : Router) { }
+  hide() {
+    this.events = false;
+  }
 
 }

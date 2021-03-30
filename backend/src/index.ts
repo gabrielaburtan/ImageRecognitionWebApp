@@ -8,6 +8,7 @@ import {Request, Response} from "express";
 import { Image } from "./entity/Image";
 import {Routes} from "./routes";
 import {User} from "./entity/User";
+import { checkJwt } from "./middleware/checkJwt";
 import {createConnection} from "typeorm";
 
 createConnection().then(async connection => {
@@ -18,7 +19,7 @@ createConnection().then(async connection => {
 
     // register express routes from defined application routes
     Routes.forEach(route => {
-        (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
+        (app as any)[route.method](route.route, [checkJwt], (req: Request, res: Response, next: Function) => {
             const result = (new (route.controller as any))[route.action](req, res, next);
             if (result instanceof Promise) {
                 result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
@@ -37,20 +38,20 @@ createConnection().then(async connection => {
 
     // insert new users for test
     await connection.manager.save(connection.manager.create(User, {
-        username: "Robert",
-        password: "Bucur"
+        email: "Robert",
+        password: "123456789"
     }));
     await connection.manager.save(connection.manager.create(User, {
-        username: "Gabriela",
-        password: "Burtan"
+        email: "Gabriela",
+        password: "123456789"
     }));
     await connection.manager.save(connection.manager.create(User, {
-        username: "Rares",
-        password: "Chirciu"
+        email: "Rares",
+        password: "123456789"
     }));
     await connection.manager.save(connection.manager.create(User, {
-        username: "Denisa",
-        password: "Francu"
+        email: "fr.denisa@yahoo.com",
+        password: "123456789"
     }));
 
     //insert images for test
@@ -59,7 +60,7 @@ createConnection().then(async connection => {
         name: 'Flower', 
         size: 240000, 
         recognition: 6, 
-        download: '/assets/imgs/pink-flower.jpg'
+        download: '/assets/pink-flower.jpg'
     }));
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");

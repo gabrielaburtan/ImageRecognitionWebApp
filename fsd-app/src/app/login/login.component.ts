@@ -18,34 +18,26 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
+  public token: string = '';
+
   submitted = true;
 
   constructor(private router:Router,private fb: FormBuilder, private userService: UserServiceService,private headerState: HeaderStateService) { }
 
   ngOnInit(): void {
-  }
-
-  validate() {
-    if (this.logInForm.valid)
-     {
-        this.userService.login(this.logInForm.getRawValue()).subscribe(data => {
-        this.router.navigate(['/table']);
-      }, error => {})
-    }
+    this.headerState.hide();
   }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.logInForm.invalid) {
-      return;
-    }
-    let body = {
-      username: this.logInForm.value.username,
-      password: this.logInForm.value.password
-    };
+    this.userService.login(this.logInForm.getRawValue())
+    .subscribe(data => {
+      localStorage.setItem('authToken', data.token);
 
-    if(this.logInForm.valid){
-      this.router.navigate(['/table']);
-    }
+      this.token = data.token;
+      this.router.navigate(['table']);
+      this.headerState.show();
+    }, err => {
+      alert(err.message)
+    });
   };
 }

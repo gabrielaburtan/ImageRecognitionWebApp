@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,16 +8,22 @@ import { Observable } from 'rxjs';
 })
 export class RequestServiceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http : HttpClient) { }
 
-  get(URL: string): Observable<any> {
-    return this.http.get(URL)
+  baseUrl : string = "http://localhost:3000/"
+
+  post(url : string, body : any) : Observable<any> {
+    const headers = {
+      headers: new HttpHeaders({
+        'content-type': 'application/json'
+      })
+    };
+    return this.http.post(this.baseUrl + url, body);
   }
 
-  post(data: {}, URL: string): Observable<any> {
-    return this.http.post(URL, {
-      'data': data,
-    })
-  }
 
+ get(url : string) : Observable<any>{
+    const headers = new HttpHeaders({'Content-Type' : 'application/json','Authorization': `Bearer ${localStorage.getItem('authToken')}`});
+    return this.http.get(this.baseUrl + url, {headers});
+  }
 }

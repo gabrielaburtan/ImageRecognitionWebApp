@@ -8,11 +8,21 @@
       "typescript": "3.3.3333"
    },
    "dependencies": {
-      "typeorm": "0.2.31",
-      "reflect-metadata": "^0.1.10",
-      "pg": "^8.4.0",
+      "@nestjs/common": "^7.6.15",
+      "@nestjs/jwt": "^7.2.0",
+      "@nestjs/passport": "^7.1.5",
+      "@nestjs/swagger": "^4.8.0",
+      "@nestjs/typeorm": "^7.1.5",
+      "@types/bcrypt": "^3.0.0",
+      "@types/bcryptjs": "^2.4.2",
+      "@types/jsonwebtoken": "^8.5.1",
+      "@types/passport-jwt": "^3.0.5",
+      "body-parser": "^1.18.1",
       "express": "^4.15.4",
-      "body-parser": "^1.18.1"
+      "jsonwebtoken": "^8.5.1",
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.31"
    },
    "scripts": {
       "start": "ts-node src/index.ts"

@@ -8,5 +8,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'fsd-app';
+  show = false;
   constructor(public router: Router){}
 }
