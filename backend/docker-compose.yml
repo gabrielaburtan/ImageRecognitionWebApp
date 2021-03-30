@@ -1,23 +1,28 @@
+# Docker compose file version
 version: "3.6"
 
 services:
-  # DB #
+  # Web App #
+  web:
+    image: "node:14"
+   
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    command: bash -c "npm install && npm start"
+  
+  # DB
   db:
     image: postgres:latest
     environment:
-      POSTGRES_DB: fsdb
-      POSTGRES_USER: fsdb
-      POSTGRES_PASSWORD: fsdb
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      POSTGRES_DB: "fsdb"
+      POSTGRES_USER: "fsdb"
+      POSTGRES_PASSWORD: "fsdb"
     ports:
-      - "9500:5432"
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-        PGADMIN_DEFAULT_EMAIL: admin
-        PGADMIN_DEFAULT_PASSWORD: admin
+      - "5432:5432"
     volumes:
-        - ./pgadmin:/root/.pgadmin
-    ports:
-        - "9501:80"
+      - ./postgres-data:/var/lib/postgresql
