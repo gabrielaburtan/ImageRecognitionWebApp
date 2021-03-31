@@ -12,6 +12,7 @@ export class HeaderStateService {
 
   show() {
      this.events = true;
+     console.log("show header");
   }
 
   hide() {
