@@ -8,7 +8,8 @@ const router = express.Router();
 
 router.post('/api/login',  async (request , response ) => {
     const userRepository = getRepository(User);
-   
+    //add a new user at first run
+    // await userRepository.insert(new User('fr.denisa@yahoo.com', '123456789'));
     await userRepository
       .findOneOrFail({ where: { email: request.body.email } })
       .then(async (user) => {

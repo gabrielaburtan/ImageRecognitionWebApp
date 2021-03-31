@@ -8,13 +8,10 @@ export class LoginController{
   
     
     async login(request: Request, response: Response, next: NextFunction){
-         const userRepository = getRepository(User);
-
-        
-
+        const userRepository = getRepository(User);     
         let username: string = request.body.email;
         let password: string = request.body.password;
-        console.log(username + " " + password);
+        
         await userRepository.findOneOrFail(
             {
                 where:
@@ -24,7 +21,7 @@ export class LoginController{
                 }
             }
         ).then(async (user) => {
-            const token = jwtToken.createToken(user ||new User());
+            const token = jwtToken.createToken(user);
             return response.status(200).json(token);
         }).catch((err) => {
             console.log("err");
