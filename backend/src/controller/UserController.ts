@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from "express";
 import {getManager, getRepository} from "typeorm";
-
+import{checkJwt} from "../middleware/checkJwt";
 import {User} from "../entity/User";
 
 export class UserController {
@@ -8,6 +8,7 @@ export class UserController {
     private userRepository = getRepository(User);
 
     async all(request: Request, response: Response, next: NextFunction) {
+        checkJwt(request, response, next);
         return this.userRepository.find();
     }
 
@@ -24,13 +25,13 @@ export class UserController {
         await this.userRepository.remove(userToRemove);
     }
 
-    async get([checkJwt], req : Request  ,res : Response ) {
+    async get( req : Request  ,res : Response ) {
         const entityManager = getManager();
         var users = await entityManager.find(User);
         res.send(users);
       }
       
-    async post([checkJwt] , req : Request, res : Response) {
+    async post( req : Request, res : Response) {
         const userRepository = getRepository(User);
         userRepository.save(req.body)
         .then(() => {

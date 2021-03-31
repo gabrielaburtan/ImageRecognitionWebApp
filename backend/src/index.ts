@@ -1,68 +1,56 @@
 import "reflect-metadata";
+import "dotenv/config";
+import { ormConfig } from "../ormconfig";
+import { createConnection } from "typeorm";
+import { NextFunction, Request, Response } from "express";
+import userRoutes from "./routes/userRoutes";
+import loginRoutes from "./routes/loginRoutes"
+import tableRoutes from "./routes/tableRoutes"
+import express = require("express");
+import { User } from "./entity/user";
 
-import * as bodyParser from "body-parser";
-import * as express from "express";
+const app = express();
+const port = 3000;
+const cors = require('cors')
 
-import {Request, Response} from "express";
+async function init() {
 
-import { Image } from "./entity/Image";
-import {Routes} from "./routes";
-import {User} from "./entity/User";
-import { checkJwt } from "./middleware/checkJwt";
-import {createConnection} from "typeorm";
+  let retries = 5
+  while(retries) {
+    try {
+      await createConnection(ormConfig);
+      break;
+    } catch(err) {
+      console.log(err);
+      console.log('retires left: ', retries);
+      retries -= 1;
+    }
+  }
 
-createConnection().then(async connection => {
+  app.use(express.json());
 
-    // create express app
-    const app = express();
-    app.use(bodyParser.json());
+  app.use(cors());
 
-    // register express routes from defined application routes
-    Routes.forEach(route => {
-        (app as any)[route.method](route.route, [checkJwt], (req: Request, res: Response, next: Function) => {
-            const result = (new (route.controller as any))[route.action](req, res, next);
-            if (result instanceof Promise) {
-                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
+  app.use(loginRoutes);
+  app.use(userRoutes);
+  app.use(tableRoutes);
 
-            } else if (result !== null && result !== undefined) {
-                res.json(result);
-            }
-        });
-    });
+ 
 
-    // setup express app here
-    // ...
+  app.use( (err : Error, req : Request, res : Response, next : NextFunction) => {
+    console.log(err);
+    res.status(500).send("Internal Server Error!");
+  });
 
-    // start express server
-    app.listen(3000);
+  await app.listen(port);
+}
 
-    // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        email: "Robert",
-        password: "123456789"
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        email: "Gabriela",
-        password: "123456789"
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        email: "Rares",
-        password: "123456789"
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        email: "fr.denisa@yahoo.com",
-        password: "123456789"
-    }));
+// createConnection().then(async connection => {
+// await connection.manager.save(connection.manager.create(User, {
+//   email: "fr.denisa@yahoo.com",
+//   password: "123456789"
+// }));});
 
-    //insert images for test
-    await connection.manager.save(connection.manager.create(Image, {
-        checked: false, 
-        name: 'Flower', 
-        size: 240000, 
-        recognition: 6, 
-        download: '/assets/pink-flower.jpg'
-    }));
-
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
-
-}).catch(error => console.log(error));
+init().then(() => {
+  console.log(`Server is listening to port: ${port}`);
+})

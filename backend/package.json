@@ -3,8 +3,8 @@
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
-      "ts-node": "3.3.0",
       "@types/node": "^8.0.29",
+      "ts-node": "^3.3.0",
       "typescript": "3.3.3333"
    },
    "dependencies": {
@@ -17,7 +17,9 @@
       "@types/bcryptjs": "^2.4.2",
       "@types/jsonwebtoken": "^8.5.1",
       "@types/passport-jwt": "^3.0.5",
+      "angular-cors": "^1.0.0",
       "body-parser": "^1.18.1",
+      "cors": "^2.8.5",
       "express": "^4.15.4",
       "jsonwebtoken": "^8.5.1",
       "pg": "^8.4.0",
@@ -25,6 +27,7 @@
       "typeorm": "0.2.31"
    },
    "scripts": {
+      "tsnode": "tsnd --inspect=0.0.0.0 --respawn --rs --clear --files ./index.ts",
       "start": "ts-node src/index.ts"
    }
 }

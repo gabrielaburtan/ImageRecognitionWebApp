@@ -10,7 +10,7 @@ export class RequestServiceService {
 
   constructor(private http : HttpClient) { }
 
-  baseUrl : string = "http://localhost:3000/"
+  baseUrl : string = "http://localhost:3000/api/"
 
   post(url : string, body : any) : Observable<any> {
     const headers = {

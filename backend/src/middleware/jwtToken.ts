@@ -6,7 +6,7 @@ type jwtType = {expiresIn : number, token : string};
 
 export class jwtToken {
 
-  static secret = "233DD6c95501BF9";
+  static secret = "9zL6Ief9L0S71wX";
 
   public static createToken(user: User): jwtType {
     const expiresIn = 60 * 60; // an hour

@@ -14,15 +14,13 @@ import { Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   logInForm = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
   public token: string = '';
 
-  submitted = true;
-
-  constructor(private router:Router,private fb: FormBuilder, private userService: UserServiceService,private headerState: HeaderStateService) { }
+  constructor(private router:Router, private userService: UserServiceService,private headerState: HeaderStateService) { }
 
   ngOnInit(): void {
     this.headerState.hide();

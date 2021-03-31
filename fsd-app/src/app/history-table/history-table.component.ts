@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FileSizePipe } from '../pipes/file-resize';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import { TableServiceService } from '../services/table-service.service';
+import { Table } from '../models/table';
 
 export interface ImageInfo {
   imageName: string;
@@ -33,6 +35,7 @@ export class HistoryTableComponent implements OnInit {
   displayedColumns: string[] = ['select', 'Image Name', 'Image Size', 'Recognition Result', 'Image Download Link'];
   dataSource = new MatTableDataSource<ImageInfo>(ELEMENT_DATA);
   selection = new SelectionModel<ImageInfo>(true, []);
+  public tables !: Table[];
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -49,8 +52,19 @@ export class HistoryTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.BindTables();
   }
 
-  constructor(private datasize: FileSizePipe){}
+  constructor(private tableService:TableServiceService){}
 
+  async BindTables(): Promise<void> {
+    try{
+      this.tableService.getTables().subscribe((tables) => {
+        this.tables = tables;
+    });
+    }catch(err : any){
+      console.log(err);
+    };
+   
+  }
 }

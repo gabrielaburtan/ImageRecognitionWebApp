@@ -5,25 +5,29 @@ import { getRepository } from "typeorm";
 import { jwtToken } from "../middleware/jwtToken";
 
 export class LoginController{
-    private userRepository = getRepository(User);
+  
     
     async login(request: Request, response: Response, next: NextFunction){
-        let username: string = request.body.username;
-        let password: string = request.body.password;
+         const userRepository = getRepository(User);
 
-        await this.userRepository.findOne(
+        
+
+        let username: string = request.body.email;
+        let password: string = request.body.password;
+        console.log(username + " " + password);
+        await userRepository.findOneOrFail(
             {
                 where:
                 {
-                    username: username,
+                    email: username,
                     password: password
                 }
             }
         ).then(async (user) => {
-            const token = jwtToken.createToken(user);
+            const token = jwtToken.createToken(user ||new User());
             return response.status(200).json(token);
         }).catch((err) => {
-            console.log(err);
+            console.log("err");
             return response.sendStatus(401);
         });
     }
