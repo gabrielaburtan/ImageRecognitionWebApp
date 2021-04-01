@@ -7,7 +7,6 @@ import userRoutes from "./routes/userRoutes";
 import loginRoutes from "./routes/loginRoutes"
 import tableRoutes from "./routes/tableRoutes"
 import express = require("express");
-import { User } from "./entity/user";
 
 const app = express();
 const port = 3000;
@@ -34,8 +33,8 @@ async function init() {
   app.use(loginRoutes);
   app.use(userRoutes);
   app.use(tableRoutes);
+  app.use(evaluateRoutes);
 
- 
 
   app.use( (err : Error, req : Request, res : Response, next : NextFunction) => {
     console.log(err);
@@ -54,3 +53,7 @@ async function init() {
 init().then(() => {
   console.log(`Server is listening to port: ${port}`);
 })
+
+function evaluateRoutes(evaluateRoutes: any) {
+  throw new Error("Function not implemented.");
+}
