@@ -6,7 +6,7 @@ import { NextFunction, Request, Response } from "express";
 import userRoutes from "./routes/userRoutes";
 import loginRoutes from "./routes/loginRoutes"
 import tableRoutes from "./routes/tableRoutes"
-import evaluateRoutes from "./routes/tableRoutes"
+import evaluateRoutes from "./routes/evaluateRoutes"
 import express = require("express");
 
 const app = express();

@@ -19,12 +19,16 @@
       "@types/jsonwebtoken": "^8.5.1",
       "@types/passport-jwt": "^3.0.5",
       "angular-cors": "^1.0.0",
+      "axios": "^0.21.1",
       "body-parser": "^1.18.1",
       "cors": "^2.8.5",
       "express": "^4.15.4",
+      "isomorphic-fetch": "^3.0.0",
       "jsonwebtoken": "^8.5.1",
+      "node-fetch": "^2.6.1",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
+      "superagent": "^6.1.0",
       "typeorm": "0.2.31"
    },
    "scripts": {

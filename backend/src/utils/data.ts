@@ -1,10 +1,9 @@
-import * as tf from '@tensorflow/tfjs';
-import { Tensor } from '@tensorflow/tfjs';
+import * as tf from '@tensorflow/tfjs-node';
 const IMAGE_SIZE = 784;
 const NUM_CLASSES = 10;
 const NUM_DATASET_ELEMENTS = 65000;
 
-const fetchAPI = require("node-fetch");
+const fetchAPI = require("isomorphic-fetch");
 const PNGReader = require("./PNGReader");
 
 const TRAIN_TEST_RATIO = 5 / 6;
