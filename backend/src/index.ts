@@ -6,6 +6,7 @@ import { NextFunction, Request, Response } from "express";
 import userRoutes from "./routes/userRoutes";
 import loginRoutes from "./routes/loginRoutes"
 import tableRoutes from "./routes/tableRoutes"
+import evaluateRoutes from "./routes/tableRoutes"
 import express = require("express");
 
 const app = express();
@@ -54,6 +55,3 @@ init().then(() => {
   console.log(`Server is listening to port: ${port}`);
 })
 
-function evaluateRoutes(evaluateRoutes: any) {
-  throw new Error("Function not implemented.");
-}
