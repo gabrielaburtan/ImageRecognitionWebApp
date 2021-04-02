@@ -6,7 +6,7 @@ const router = express.Router();
 const IMAGE_WIDTH = 28;
 const IMAGE_HEIGHT = 28;
 const testDataSize = 1;
-const modelPath = '../mlFiles/model.json';
+const modelPath = 'file://../mlFiles/model.json';
 const data = new MnistData();
 
 router.get('/api/evaluate', async (request , response ) => {
